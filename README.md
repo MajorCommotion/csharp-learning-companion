@@ -4,6 +4,8 @@
 
 Perfect for WinForms developers transitioning to ASP.NET Core, junior developers learning fundamentals, and self-study.
 
+[Read this in other languages: [한국어](README-ko.md)]
+
 ## Features
 
 ✅ **Multilingual Support** 🌍 - English and Korean (한국어)  
