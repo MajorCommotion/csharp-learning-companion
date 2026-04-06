@@ -1,0 +1,135 @@
+{
+  "app_title": "C# / ASP.NET 학습 도우미",
+  "welcome": "C# / ASP.NET 학습 도우미에 오신 것을 환영합니다!",
+  "current_score": "현재 점수: {score}점",
+  "progress_summary": "진행 상황: {topics}개 주제 | {quizzes}개 퀴즈 | {score}점",
+  
+  "menu": {
+    "browse_topics": "주제 둘러보기",
+    "take_quiz": "퀴즈 풀기",
+    "view_examples": "코드 예제 보기",
+    "practice": "연습 문제",
+    "view_progress": "진행 상황 보기",
+    "recommendations": "학습 경로 추천",
+    "change_language": "언어 변경",
+    "exit": "종료"
+  },
+  
+  "topics": {
+    "csharp_basics": {
+      "title": "C# 기초",
+      "description": "핵심 C# 언어 기능"
+    },
+    "oop": {
+      "title": "객체 지향 프로그래밍",
+      "description": "C#의 OOP 개념"
+    },
+    "collections": {
+      "title": "컬렉션과 LINQ",
+      "description": "데이터 구조 다루기"
+    },
+    "async": {
+      "title": "비동기 프로그래밍",
+      "description": "Async/Await와 스레딩"
+    },
+    "aspnet_core": {
+      "title": "ASP.NET Core 기초",
+      "description": "ASP.NET을 활용한 현대적인 웹 개발"
+    },
+    "entity_framework": {
+      "title": "Entity Framework Core",
+      "description": "데이터베이스 접근을 위한 ORM"
+    },
+    "web_api": {
+      "title": "RESTful Web API",
+      "description": "ASP.NET Core로 API 구축하기"
+    },
+    "best_practices": {
+      "title": "모범 사례 및 패턴",
+      "description": "엔터프라이즈급 코드 품질"
+    }
+  },
+  
+  "prompts": {
+    "enter_choice": "선택하세요",
+    "enter_topic": "학습할 주제 번호를 입력하세요 (0: 돌아가기)",
+    "enter_quiz": "퀴즈 번호를 입력하세요 (0: 돌아가기)",
+    "enter_example": "예제 번호를 입력하세요 (0: 돌아가기)",
+    "your_answer": "답변 (1-4)",
+    "press_enter": "계속하려면 Enter를 누르세요...",
+    "press_mark_complete": "완료로 표시하려면 Enter를 누르세요...",
+    "next_question": "다음 질문으로 가려면 Enter를 누르세요..."
+  },
+  
+  "feedback": {
+    "correct": "정답입니다!",
+    "incorrect": "오답입니다. 정답: {answer}번",
+    "explanation": "설명",
+    "passed": "합격!",
+    "keep_studying": "계속 공부하고 다시 도전하세요!",
+    "topic_completed": "주제 완료! (+10점)",
+    "quiz_completed": "퀴즈 완료! (+{points}점)",
+    "progress_saved": "진행 상황이 저장되었습니다. 즐거운 코딩 되세요!",
+    "invalid_choice": "잘못된 선택입니다. 다시 시도하세요.",
+    "goodbye": "진행 상황이 저장되었습니다. 또 만나요!"
+  },
+  
+  "headers": {
+    "learning_topics": "학습 주제",
+    "available_quizzes": "이용 가능한 퀴즈",
+    "quiz_results": "퀴즈 결과",
+    "code_examples": "코드 예제",
+    "practice_exercises": "연습 문제",
+    "your_progress": "나의 진행 상황",
+    "learning_path": "학습 경로 추천"
+  },
+  
+  "progress": {
+    "started": "시작일",
+    "days_learning": "학습 일수",
+    "total_score": "총점",
+    "topics_completed": "완료한 주제",
+    "quizzes_passed": "통과한 퀴즈",
+    "overall_completion": "전체 완료율",
+    "score_label": "점수"
+  },
+  
+  "recommendations": {
+    "beginner_path": "추천 경로: 초급",
+    "intermediate_path": "추천 경로: 중급",
+    "advanced_path": "추천 경로: 고급",
+    "start_with": "다음부터 시작하세요:",
+    "once_comfortable": "익숙해지면 다음으로 넘어가세요:",
+    "focus_on": "다음에 집중하세요:",
+    "deepen_knowledge": "지식을 심화하세요:",
+    "next_steps": "다음 단계:",
+    "additional_resources": "추가 자료:",
+    "build_projects": "실제 프로젝트 구축",
+    "contribute_opensource": "오픈 소스 기여",
+    "learn_microservices": "마이크로서비스 아키텍처 학습"
+  },
+  
+  "exercises": {
+    "simple_api": {
+      "title": "간단한 REST API 만들기",
+      "description": "CRUD 기능이 있는 제품 API 구축",
+      "difficulty": "초급"
+    },
+    "repository_pattern": {
+      "title": "리포지토리 패턴 구현",
+      "description": "데이터 접근을 위한 제네릭 리포지토리 생성",
+      "difficulty": "중급"
+    },
+    "authentication": {
+      "title": "인증 시스템 구축",
+      "description": "JWT 인증 구현",
+      "difficulty": "고급"
+    }
+  },
+  
+  "language": {
+    "select": "Select Language / 언어 선택",
+    "current": "현재 언어",
+    "changed": "언어가 {lang}(으)로 변경되었습니다"
+  }
+}

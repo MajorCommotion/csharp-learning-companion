@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 """
-C# / ASP.NET Learning Companion
+C# / ASP.NET Learning Companion (Internationalized)
 Interactive learning tool for C# and ASP.NET developers.
+
+NOW SUPPORTS MULTIPLE LANGUAGES! 🌍
+- English
+- 한국어 (Korean)
 
 Perfect for:
 - WinForms developers learning ASP.NET Core
 - Junior developers learning C# fundamentals
 - Self-study and skill assessment
+- Korean-speaking developers
 
 Author: lexcellent
 License: MIT
+Version: 2.0.0 (i18n)
 """
 
 import json
@@ -19,6 +25,9 @@ from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, asdict
 import random
+
+# Import i18n module
+from i18n import get_i18n, t
 
 
 @dataclass
@@ -30,17 +39,18 @@ class LearningProgress:
     exercises_completed: int
     last_activity: str
     started_date: str
+    language: str = 'en'  # NEW: Store user's language preference
     
     def save(self, filepath: str = "progress.json"):
         """Save progress to file."""
-        with open(filepath, 'w') as f:
-            json.dump(asdict(self), f, indent=2)
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(asdict(self), f, indent=2, ensure_ascii=False)
     
     @classmethod
     def load(cls, filepath: str = "progress.json"):
         """Load progress from file."""
         if os.path.exists(filepath):
-            with open(filepath, 'r') as f:
+            with open(filepath, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 return cls(**data)
         return cls(
@@ -49,26 +59,30 @@ class LearningProgress:
             total_score=0,
             exercises_completed=0,
             last_activity=datetime.now().isoformat(),
-            started_date=datetime.now().isoformat()
+            started_date=datetime.now().isoformat(),
+            language='en'
         )
 
 
 class CSharpLearningCompanion:
-    """Main learning companion class."""
+    """Main learning companion class (internationalized)."""
     
     def __init__(self):
         """Initialize learning companion."""
         self.progress = LearningProgress.load()
+        self.i18n = get_i18n()
+        
+        # Set language from saved progress
+        self.i18n.set_language(self.progress.language)
+        
         self.topics = self._load_topics()
         self.quizzes = self._load_quizzes()
         self.code_examples = self._load_code_examples()
     
     def _load_topics(self) -> Dict[str, Dict]:
-        """Load learning topics."""
+        """Load learning topics (content remains in English for technical accuracy)."""
         return {
             "csharp_basics": {
-                "title": "C# Fundamentals",
-                "description": "Core C# language features",
                 "subtopics": [
                     "Variables and Data Types",
                     "Control Flow (if, switch, loops)",
@@ -79,8 +93,6 @@ class CSharpLearningCompanion:
                 ]
             },
             "oop": {
-                "title": "Object-Oriented Programming",
-                "description": "OOP concepts in C#",
                 "subtopics": [
                     "Encapsulation",
                     "Inheritance",
@@ -91,8 +103,6 @@ class CSharpLearningCompanion:
                 ]
             },
             "collections": {
-                "title": "Collections and LINQ",
-                "description": "Working with data structures",
                 "subtopics": [
                     "List<T> and Arrays",
                     "Dictionary and HashSet",
@@ -103,8 +113,6 @@ class CSharpLearningCompanion:
                 ]
             },
             "async": {
-                "title": "Async/Await and Threading",
-                "description": "Asynchronous programming",
                 "subtopics": [
                     "async and await keywords",
                     "Task and Task<T>",
@@ -115,8 +123,6 @@ class CSharpLearningCompanion:
                 ]
             },
             "aspnet_core": {
-                "title": "ASP.NET Core Fundamentals",
-                "description": "Modern web development with ASP.NET",
                 "subtopics": [
                     "MVC Pattern",
                     "Controllers and Actions",
@@ -127,8 +133,6 @@ class CSharpLearningCompanion:
                 ]
             },
             "entity_framework": {
-                "title": "Entity Framework Core",
-                "description": "ORM for database access",
                 "subtopics": [
                     "DbContext and DbSet",
                     "Code-First vs Database-First",
@@ -139,8 +143,6 @@ class CSharpLearningCompanion:
                 ]
             },
             "web_api": {
-                "title": "RESTful Web APIs",
-                "description": "Building APIs with ASP.NET Core",
                 "subtopics": [
                     "REST Principles",
                     "HTTP Verbs (GET, POST, PUT, DELETE)",
@@ -151,8 +153,6 @@ class CSharpLearningCompanion:
                 ]
             },
             "best_practices": {
-                "title": "Best Practices & Patterns",
-                "description": "Enterprise-grade code quality",
                 "subtopics": [
                     "Repository Pattern",
                     "Unit of Work Pattern",
@@ -165,7 +165,7 @@ class CSharpLearningCompanion:
         }
     
     def _load_quizzes(self) -> Dict[str, List[Dict]]:
-        """Load quiz questions."""
+        """Load quiz questions (kept in English for technical accuracy)."""
         return {
             "csharp_basics": [
                 {
@@ -277,7 +277,7 @@ class CSharpLearningCompanion:
         }
     
     def _load_code_examples(self) -> Dict[str, List[Dict]]:
-        """Load code examples."""
+        """Load code examples (kept in English - code is universal)."""
         return {
             "csharp_basics": [
                 {
@@ -506,38 +506,61 @@ public class ProductsController : ControllerBase
         }
     
     def show_menu(self):
-        """Display main menu."""
+        """Display main menu (localized)."""
         print("\n" + "="*60)
-        print("C# / ASP.NET LEARNING COMPANION")
+        print(t('app_title'))
         print("="*60)
-        print(f"Progress: {len(self.progress.topics_completed)} topics | "
-              f"{len(self.progress.quizzes_passed)} quizzes | "
-              f"{self.progress.total_score} points")
+        print(t('progress_summary', 
+                topics=len(self.progress.topics_completed),
+                quizzes=len(self.progress.quizzes_passed),
+                score=self.progress.total_score))
         print("="*60)
-        print("\n1. Browse Topics")
-        print("2. Take a Quiz")
-        print("3. View Code Examples")
-        print("4. Practice Exercises")
-        print("5. View Progress")
-        print("6. Learning Path Recommendations")
-        print("7. Exit")
+        print(f"\n1. {t('menu.browse_topics')}")
+        print(f"2. {t('menu.take_quiz')}")
+        print(f"3. {t('menu.view_examples')}")
+        print(f"4. {t('menu.practice')}")
+        print(f"5. {t('menu.view_progress')}")
+        print(f"6. {t('menu.recommendations')}")
+        print(f"7. {t('menu.change_language')} 🌍")
+        print(f"8. {t('menu.exit')}")
         print()
     
-    def browse_topics(self):
-        """Browse available topics."""
+    def change_language(self):
+        """Change interface language."""
         print("\n" + "="*60)
-        print("LEARNING TOPICS")
+        print(t('language.select'))
+        print("="*60)
+        
+        languages = self.i18n.list_languages()
+        for idx, (code, name) in enumerate(languages.items(), 1):
+            current = "✓" if code == self.i18n.current_language else " "
+            print(f"{idx}. [{current}] {name} ({code})")
+        
+        choice = input(f"\n{t('prompts.enter_choice')} (1-{len(languages)}): ")
+        
+        if choice.isdigit() and 1 <= int(choice) <= len(languages):
+            lang_code = list(languages.keys())[int(choice) - 1]
+            self.i18n.set_language(lang_code)
+            self.progress.language = lang_code
+            self.progress.save()
+            print(f"\n✅ {t('language.changed', lang=self.i18n.get_language_name())}")
+            input(f"\n{t('prompts.press_enter')}")
+    
+    def browse_topics(self):
+        """Browse available topics (localized)."""
+        print("\n" + "="*60)
+        print(t('headers.learning_topics'))
         print("="*60)
         
         for idx, (key, topic) in enumerate(self.topics.items(), 1):
             completed = "✅" if key in self.progress.topics_completed else "⬜"
-            print(f"\n{idx}. {completed} {topic['title']}")
-            print(f"   {topic['description']}")
+            print(f"\n{idx}. {completed} {t(f'topics.{key}.title')}")
+            print(f"   {t(f'topics.{key}.description')}")
             print(f"   Subtopics:")
             for subtopic in topic['subtopics']:
                 print(f"     • {subtopic}")
         
-        choice = input("\nEnter topic number to study (or 0 to return): ")
+        choice = input(f"\n{t('prompts.enter_topic')}: ")
         if choice.isdigit() and 1 <= int(choice) <= len(self.topics):
             topic_key = list(self.topics.keys())[int(choice) - 1]
             self.study_topic(topic_key)
@@ -546,38 +569,37 @@ public class ProductsController : ControllerBase
         """Study a specific topic."""
         topic = self.topics[topic_key]
         print("\n" + "="*60)
-        print(f"STUDYING: {topic['title']}")
+        print(f"{t('headers.learning_topics').replace('LEARNING TOPICS', 'STUDYING')}: {t(f'topics.{topic_key}.title')}")
         print("="*60)
-        print(f"\n{topic['description']}\n")
+        print(f"\n{t(f'topics.{topic_key}.description')}\n")
         
         print("Key Concepts:")
         for subtopic in topic['subtopics']:
             print(f"  • {subtopic}")
         
-        # Show related code examples
         if topic_key in self.code_examples:
             print(f"\nAvailable Code Examples: {len(self.code_examples[topic_key])}")
         
-        input("\nPress Enter to mark as completed...")
+        input(f"\n{t('prompts.press_mark_complete')}")
         
         if topic_key not in self.progress.topics_completed:
             self.progress.topics_completed.append(topic_key)
             self.progress.total_score += 10
             self.progress.save()
-            print("✅ Topic marked as completed! (+10 points)")
+            print(f"✅ {t('feedback.topic_completed')}")
     
     def take_quiz(self):
-        """Take a quiz."""
+        """Take a quiz (localized interface, English questions)."""
         print("\n" + "="*60)
-        print("AVAILABLE QUIZZES")
+        print(t('headers.available_quizzes'))
         print("="*60)
         
         for idx, (key, questions) in enumerate(self.quizzes.items(), 1):
             passed = "✅" if key in self.progress.quizzes_passed else "⬜"
-            topic_title = self.topics[key]['title']
+            topic_title = t(f'topics.{key}.title')
             print(f"{idx}. {passed} {topic_title} ({len(questions)} questions)")
         
-        choice = input("\nEnter quiz number (or 0 to return): ")
+        choice = input(f"\n{t('prompts.enter_quiz')}: ")
         if choice.isdigit() and 1 <= int(choice) <= len(self.quizzes):
             quiz_key = list(self.quizzes.keys())[int(choice) - 1]
             self.run_quiz(quiz_key)
@@ -585,7 +607,7 @@ public class ProductsController : ControllerBase
     def run_quiz(self, quiz_key: str):
         """Run a specific quiz."""
         questions = self.quizzes[quiz_key]
-        topic_title = self.topics[quiz_key]['title']
+        topic_title = t(f'topics.{quiz_key}.title')
         
         print("\n" + "="*60)
         print(f"QUIZ: {topic_title}")
@@ -600,50 +622,49 @@ public class ProductsController : ControllerBase
             for opt_idx, option in enumerate(q['options']):
                 print(f"{opt_idx + 1}. {option}")
             
-            answer = input("\nYour answer (1-4): ")
+            answer = input(f"\n{t('prompts.your_answer')}: ")
             
             if answer.isdigit() and int(answer) - 1 == q['correct']:
-                print("✅ Correct!")
+                print(f"✅ {t('feedback.correct')}")
                 score += 1
             else:
-                print(f"❌ Incorrect. Correct answer: {q['correct'] + 1}")
+                print(f"❌ {t('feedback.incorrect', answer=q['correct'] + 1)}")
             
-            print(f"💡 Explanation: {q['explanation']}")
-            input("\nPress Enter for next question...")
+            print(f"💡 {t('feedback.explanation')}: {q['explanation']}")
+            input(f"\n{t('prompts.next_question')}")
         
-        # Calculate results
         percentage = (score / len(questions)) * 100
         print("\n" + "="*60)
-        print("QUIZ RESULTS")
+        print(t('headers.quiz_results'))
         print("="*60)
-        print(f"Score: {score}/{len(questions)} ({percentage:.0f}%)")
+        print(f"{t('progress.score_label')}: {score}/{len(questions)} ({percentage:.0f}%)")
         
         if percentage >= 70:
-            print("🎉 PASSED!")
+            print(f"🎉 {t('feedback.passed')}")
             if quiz_key not in self.progress.quizzes_passed:
                 self.progress.quizzes_passed.append(quiz_key)
                 self.progress.total_score += score * 5
                 self.progress.save()
-                print(f"✅ Quiz completed! (+{score * 5} points)")
+                print(f"✅ {t('feedback.quiz_completed', points=score * 5)}")
         else:
-            print("📚 Keep studying and try again!")
+            print(f"📚 {t('feedback.keep_studying')}")
     
     def view_code_examples(self):
         """View code examples."""
         print("\n" + "="*60)
-        print("CODE EXAMPLES")
+        print(t('headers.code_examples'))
         print("="*60)
         
         all_examples = []
         for topic_key, examples in self.code_examples.items():
-            topic_title = self.topics[topic_key]['title']
+            topic_title = t(f'topics.{topic_key}.title')
             for example in examples:
                 all_examples.append((topic_title, example))
         
         for idx, (topic, example) in enumerate(all_examples, 1):
             print(f"\n{idx}. [{topic}] {example['title']}")
         
-        choice = input("\nEnter example number (or 0 to return): ")
+        choice = input(f"\n{t('prompts.enter_example')}: ")
         if choice.isdigit() and 1 <= int(choice) <= len(all_examples):
             _, example = all_examples[int(choice) - 1]
             self.show_code_example(example)
@@ -657,145 +678,139 @@ public class ProductsController : ControllerBase
         print("\n" + "-"*60)
         print("💡 " + example['explanation'])
         print("="*60)
-        input("\nPress Enter to continue...")
+        input(f"\n{t('prompts.press_enter')}")
     
     def practice_exercises(self):
-        """Show practice exercises."""
-        exercises = [
-            {
-                "title": "Create a Simple REST API",
-                "description": "Build a products API with CRUD operations",
-                "difficulty": "Beginner",
-                "tasks": [
-                    "Create ProductsController with [ApiController]",
-                    "Implement GET /api/products",
-                    "Implement POST /api/products",
-                    "Add model validation with DataAnnotations",
-                    "Return proper HTTP status codes"
-                ]
-            },
-            {
-                "title": "Implement Repository Pattern",
-                "description": "Create generic repository for data access",
-                "difficulty": "Intermediate",
-                "tasks": [
-                    "Create IRepository<T> interface",
-                    "Implement GenericRepository<T>",
-                    "Add Unit of Work pattern",
-                    "Use dependency injection",
-                    "Write unit tests"
-                ]
-            },
-            {
-                "title": "Build Authentication System",
-                "description": "Implement JWT authentication",
-                "difficulty": "Advanced",
-                "tasks": [
-                    "Create User model and DbContext",
-                    "Implement registration endpoint",
-                    "Implement login with JWT",
-                    "Add [Authorize] attribute",
-                    "Refresh token mechanism"
-                ]
-            }
-        ]
-        
+        """Show practice exercises (localized)."""
         print("\n" + "="*60)
-        print("PRACTICE EXERCISES")
+        print(t('headers.practice_exercises'))
         print("="*60)
         
-        for idx, exercise in enumerate(exercises, 1):
+        exercises_keys = ['simple_api', 'repository_pattern', 'authentication']
+        exercises = []
+        
+        for key in exercises_keys:
+            exercises.append({
+                "title": t(f'exercises.{key}.title'),
+                "description": t(f'exercises.{key}.description'),
+                "difficulty": t(f'exercises.{key}.difficulty')
+            })
+        
+        # Hard-coded tasks (kept in English for technical terms)
+        tasks = [
+            [
+                "Create ProductsController with [ApiController]",
+                "Implement GET /api/products",
+                "Implement POST /api/products",
+                "Add model validation with DataAnnotations",
+                "Return proper HTTP status codes"
+            ],
+            [
+                "Create IRepository<T> interface",
+                "Implement GenericRepository<T>",
+                "Add Unit of Work pattern",
+                "Use dependency injection",
+                "Write unit tests"
+            ],
+            [
+                "Create User model and DbContext",
+                "Implement registration endpoint",
+                "Implement login with JWT",
+                "Add [Authorize] attribute",
+                "Refresh token mechanism"
+            ]
+        ]
+        
+        for idx, (exercise, task_list) in enumerate(zip(exercises, tasks), 1):
             print(f"\n{idx}. {exercise['title']} [{exercise['difficulty']}]")
             print(f"   {exercise['description']}")
             print("   Tasks:")
-            for task in exercise['tasks']:
+            for task in task_list:
                 print(f"     ☐ {task}")
         
-        input("\nPress Enter to continue...")
+        input(f"\n{t('prompts.press_enter')}")
     
     def view_progress(self):
-        """View learning progress."""
+        """View learning progress (localized)."""
         print("\n" + "="*60)
-        print("YOUR PROGRESS")
+        print(t('headers.your_progress'))
         print("="*60)
         
         started = datetime.fromisoformat(self.progress.started_date)
         days_learning = (datetime.now() - started).days
         
-        print(f"\n📅 Started: {started.strftime('%Y-%m-%d')}")
-        print(f"⏱️  Days learning: {days_learning}")
-        print(f"🎯 Total Score: {self.progress.total_score} points")
-        print(f"\n📚 Topics Completed: {len(self.progress.topics_completed)}/{len(self.topics)}")
+        print(f"\n📅 {t('progress.started')}: {started.strftime('%Y-%m-%d')}")
+        print(f"⏱️  {t('progress.days_learning')}: {days_learning}")
+        print(f"🎯 {t('progress.total_score')}: {self.progress.total_score} points")
+        print(f"\n📚 {t('progress.topics_completed')}: {len(self.progress.topics_completed)}/{len(self.topics)}")
         
         for topic_key in self.progress.topics_completed:
-            print(f"  ✅ {self.topics[topic_key]['title']}")
+            print(f"  ✅ {t(f'topics.{topic_key}.title')}")
         
-        print(f"\n📝 Quizzes Passed: {len(self.progress.quizzes_passed)}/{len(self.quizzes)}")
+        print(f"\n📝 {t('progress.quizzes_passed')}: {len(self.progress.quizzes_passed)}/{len(self.quizzes)}")
         
         for quiz_key in self.progress.quizzes_passed:
-            print(f"  ✅ {self.topics[quiz_key]['title']}")
+            print(f"  ✅ {t(f'topics.{quiz_key}.title')}")
         
-        # Calculate completion percentage
         total_items = len(self.topics) + len(self.quizzes)
         completed_items = len(self.progress.topics_completed) + len(self.progress.quizzes_passed)
         completion = (completed_items / total_items) * 100 if total_items > 0 else 0
         
-        print(f"\n📊 Overall Completion: {completion:.0f}%")
+        print(f"\n📊 {t('progress.overall_completion')}: {completion:.0f}%")
         
-        input("\nPress Enter to continue...")
+        input(f"\n{t('prompts.press_enter')}")
     
     def learning_recommendations(self):
-        """Provide personalized learning recommendations."""
+        """Provide personalized learning recommendations (localized)."""
         print("\n" + "="*60)
-        print("LEARNING PATH RECOMMENDATIONS")
+        print(t('headers.learning_path'))
         print("="*60)
         
-        # Determine skill level
         completed_topics = len(self.progress.topics_completed)
         
         if completed_topics == 0:
-            print("\n🎯 Recommended Path: Beginner")
-            print("\nStart with:")
-            print("1. C# Fundamentals")
-            print("2. Object-Oriented Programming")
-            print("3. Collections and LINQ")
-            print("\nOnce comfortable, move to:")
-            print("4. ASP.NET Core Fundamentals")
+            print(f"\n🎯 {t('recommendations.beginner_path')}")
+            print(f"\n{t('recommendations.start_with')}")
+            print(f"1. {t('topics.csharp_basics.title')}")
+            print(f"2. {t('topics.oop.title')}")
+            print(f"3. {t('topics.collections.title')}")
+            print(f"\n{t('recommendations.once_comfortable')}")
+            print(f"4. {t('topics.aspnet_core.title')}")
         
         elif completed_topics < 4:
-            print("\n🎯 Recommended Path: Intermediate")
-            print("\nFocus on:")
-            print("1. Async/Await and Threading")
-            print("2. ASP.NET Core Fundamentals")
-            print("3. Entity Framework Core")
+            print(f"\n🎯 {t('recommendations.intermediate_path')}")
+            print(f"\n{t('recommendations.focus_on')}")
+            print(f"1. {t('topics.async.title')}")
+            print(f"2. {t('topics.aspnet_core.title')}")
+            print(f"3. {t('topics.entity_framework.title')}")
         
         else:
-            print("\n🎯 Recommended Path: Advanced")
-            print("\nDeepen your knowledge:")
-            print("1. RESTful Web APIs")
-            print("2. Best Practices & Patterns")
+            print(f"\n🎯 {t('recommendations.advanced_path')}")
+            print(f"\n{t('recommendations.deepen_knowledge')}")
+            print(f"1. {t('topics.web_api.title')}")
+            print(f"2. {t('topics.best_practices.title')}")
             print("3. Advanced EF Core (performance tuning)")
-            print("\nNext steps:")
-            print("• Build real-world projects")
-            print("• Contribute to open source")
-            print("• Learn microservices architecture")
+            print(f"\n{t('recommendations.next_steps')}")
+            print(f"• {t('recommendations.build_projects')}")
+            print(f"• {t('recommendations.contribute_opensource')}")
+            print(f"• {t('recommendations.learn_microservices')}")
         
-        print("\n💡 Additional Resources:")
+        print(f"\n💡 {t('recommendations.additional_resources')}")
         print("• Microsoft Learn (docs.microsoft.com/learn)")
         print("• Pluralsight C# Path")
         print("• ASP.NET Core documentation")
         print("• Entity Framework Core tutorials")
         
-        input("\nPress Enter to continue...")
+        input(f"\n{t('prompts.press_enter')}")
     
     def run(self):
         """Main application loop."""
-        print("\n🎓 Welcome to C# / ASP.NET Learning Companion!")
-        print(f"📊 Your current score: {self.progress.total_score} points")
+        print(f"\n🎓 {t('welcome')}")
+        print(t('current_score', score=self.progress.total_score))
         
         while True:
             self.show_menu()
-            choice = input("Enter your choice (1-7): ")
+            choice = input(f"{t('prompts.enter_choice')} (1-8): ")
             
             if choice == '1':
                 self.browse_topics()
@@ -810,12 +825,14 @@ public class ProductsController : ControllerBase
             elif choice == '6':
                 self.learning_recommendations()
             elif choice == '7':
+                self.change_language()
+            elif choice == '8':
                 self.progress.last_activity = datetime.now().isoformat()
                 self.progress.save()
-                print("\n✅ Progress saved. Happy coding! 👨‍💻")
+                print(f"\n✅ {t('feedback.progress_saved')}")
                 break
             else:
-                print("❌ Invalid choice. Please try again.")
+                print(f"❌ {t('feedback.invalid_choice')}")
 
 
 def main():
@@ -824,9 +841,11 @@ def main():
         companion = CSharpLearningCompanion()
         companion.run()
     except KeyboardInterrupt:
-        print("\n\n✅ Progress saved. See you next time!")
+        print(f"\n\n✅ {t('feedback.goodbye')}")
     except Exception as e:
         print(f"\n❌ Error: {e}")
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
 
 

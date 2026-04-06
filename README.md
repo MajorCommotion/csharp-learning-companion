@@ -1,9 +1,12 @@
 # C# / ASP.NET Learning Companion
 
-Interactive learning tool for C# and ASP.NET developers. Perfect for WinForms developers transitioning to ASP.NET Core, junior developers learning fundamentals, and self-study.
+🌍 **NOW MULTILINGUAL!** Interactive learning tool for C# and ASP.NET developers in **English** and **한국어 (Korean)**.
+
+Perfect for WinForms developers transitioning to ASP.NET Core, junior developers learning fundamentals, and self-study.
 
 ## Features
 
+✅ **Multilingual Support** 🌍 - English and Korean (한국어)  
 ✅ **8 Core Topics** - C# fundamentals to advanced ASP.NET Core  
 ✅ **Interactive Quizzes** - Test your knowledge with instant feedback  
 ✅ **Code Examples** - Real-world C# and ASP.NET snippets  
@@ -11,7 +14,14 @@ Interactive learning tool for C# and ASP.NET developers. Perfect for WinForms de
 ✅ **Progress Tracking** - Save your learning journey  
 ✅ **Personalized Recommendations** - Adaptive learning paths  
 ✅ **SOLID Principles** - Enterprise-grade best practices  
-✅ **Zero Dependencies** - Pure Python, runs anywhere  
+✅ **Zero Dependencies** - Pure Python, runs anywhere
+
+## Supported Languages
+
+- 🇺🇸 **English** - Full interface localization
+- 🇰🇷 **한국어 (Korean)** - Complete Korean translation
+
+_Technical content (code examples, quizzes) maintained in English for accuracy. Interface fully translated._  
 
 ---
 
@@ -97,7 +107,11 @@ No dependencies required! Pure Python 3.6+
 ./learn.py
 ```
 
-**Main Menu:**
+**Language Selection:**
+
+On first run, the app defaults to English. Change language anytime from the main menu (option 7).
+
+**Main Menu (English):**
 ```
 ============================================================
 C# / ASP.NET LEARNING COMPANION
@@ -108,6 +122,24 @@ Progress: 0 topics | 0 quizzes | 0 points
 1. Browse Topics
 2. Take a Quiz
 3. View Code Examples
+4. Practice Exercises
+5. View Progress
+6. Learning Path Recommendations
+7. Change Language 🌍
+8. Exit
+```
+
+**메인 메뉴 (Korean):**
+```
+============================================================
+C# / ASP.NET 학습 도우미
+============================================================
+진행 상황: 0개 주제 | 0개 퀴즈 | 0점
+============================================================
+
+1. 주제 둘러보기
+2. 퀴즈 풀기
+3. 코드 예제 보기
 4. Practice Exercises
 5. View Progress
 6. Learning Path Recommendations
@@ -355,13 +387,70 @@ Your progress is automatically saved to `progress.json`:
 
 ---
 
+## Internationalization (i18n)
+
+### Architecture
+
+The app uses a **JSON-based i18n system** for easy translation:
+
+```
+csharp-learning-companion/
+├── learn.py           # Main application (i18n-enabled)
+├── i18n.py            # Translation engine
+└── locales/
+    ├── en.json        # English translations
+    └── ko.json        # Korean translations
+```
+
+### Adding New Languages
+
+1. **Create translation file:**
+   ```bash
+   cp locales/en.json locales/ja.json  # Japanese example
+   ```
+
+2. **Translate strings:**
+   ```json
+   {
+     "app_title": "C# / ASP.NET 学習コンパニオン",
+     "welcome": "C# / ASP.NET 学習コンパニオンへようこそ!",
+     ...
+   }
+   ```
+
+3. **Register language in `i18n.py`:**
+   ```python
+   SUPPORTED_LANGUAGES = {
+       'en': 'English',
+       'ko': '한국어 (Korean)',
+       'ja': '日本語 (Japanese)'  # Add here
+   }
+   ```
+
+4. **Test and submit PR!**
+
+### Translation Guidelines
+
+- **UI elements**: Fully translate (menus, prompts, feedback)
+- **Technical content**: Keep in English for accuracy
+  - Code examples
+  - Quiz questions
+  - Programming terms (MVC, LINQ, async/await)
+- **Hybrid approach**: Korean UI + English technical terms works well
+
+---
+
 ## Contributing
 
 Contributions welcome! Add:
+- **New languages** (Japanese, Spanish, Chinese, etc.)
 - New topics
 - Quiz questions
 - Code examples
 - Practice exercises
+
+**Translation Contributors:**
+- 🇰🇷 Korean: lexcellent
 
 ---
 

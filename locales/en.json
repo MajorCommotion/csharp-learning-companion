@@ -1,0 +1,135 @@
+{
+  "app_title": "C# / ASP.NET LEARNING COMPANION",
+  "welcome": "Welcome to C# / ASP.NET Learning Companion!",
+  "current_score": "Your current score: {score} points",
+  "progress_summary": "Progress: {topics} topics | {quizzes} quizzes | {score} points",
+  
+  "menu": {
+    "browse_topics": "Browse Topics",
+    "take_quiz": "Take a Quiz",
+    "view_examples": "View Code Examples",
+    "practice": "Practice Exercises",
+    "view_progress": "View Progress",
+    "recommendations": "Learning Path Recommendations",
+    "change_language": "Change Language",
+    "exit": "Exit"
+  },
+  
+  "topics": {
+    "csharp_basics": {
+      "title": "C# Fundamentals",
+      "description": "Core C# language features"
+    },
+    "oop": {
+      "title": "Object-Oriented Programming",
+      "description": "OOP concepts in C#"
+    },
+    "collections": {
+      "title": "Collections and LINQ",
+      "description": "Working with data structures"
+    },
+    "async": {
+      "title": "Async/Await and Threading",
+      "description": "Asynchronous programming"
+    },
+    "aspnet_core": {
+      "title": "ASP.NET Core Fundamentals",
+      "description": "Modern web development with ASP.NET"
+    },
+    "entity_framework": {
+      "title": "Entity Framework Core",
+      "description": "ORM for database access"
+    },
+    "web_api": {
+      "title": "RESTful Web APIs",
+      "description": "Building APIs with ASP.NET Core"
+    },
+    "best_practices": {
+      "title": "Best Practices & Patterns",
+      "description": "Enterprise-grade code quality"
+    }
+  },
+  
+  "prompts": {
+    "enter_choice": "Enter your choice",
+    "enter_topic": "Enter topic number to study (or 0 to return)",
+    "enter_quiz": "Enter quiz number (or 0 to return)",
+    "enter_example": "Enter example number (or 0 to return)",
+    "your_answer": "Your answer (1-4)",
+    "press_enter": "Press Enter to continue...",
+    "press_mark_complete": "Press Enter to mark as completed...",
+    "next_question": "Press Enter for next question..."
+  },
+  
+  "feedback": {
+    "correct": "Correct!",
+    "incorrect": "Incorrect. Correct answer: {answer}",
+    "explanation": "Explanation",
+    "passed": "PASSED!",
+    "keep_studying": "Keep studying and try again!",
+    "topic_completed": "Topic marked as completed! (+10 points)",
+    "quiz_completed": "Quiz completed! (+{points} points)",
+    "progress_saved": "Progress saved. Happy coding!",
+    "invalid_choice": "Invalid choice. Please try again.",
+    "goodbye": "Progress saved. See you next time!"
+  },
+  
+  "headers": {
+    "learning_topics": "LEARNING TOPICS",
+    "available_quizzes": "AVAILABLE QUIZZES",
+    "quiz_results": "QUIZ RESULTS",
+    "code_examples": "CODE EXAMPLES",
+    "practice_exercises": "PRACTICE EXERCISES",
+    "your_progress": "YOUR PROGRESS",
+    "learning_path": "LEARNING PATH RECOMMENDATIONS"
+  },
+  
+  "progress": {
+    "started": "Started",
+    "days_learning": "Days learning",
+    "total_score": "Total Score",
+    "topics_completed": "Topics Completed",
+    "quizzes_passed": "Quizzes Passed",
+    "overall_completion": "Overall Completion",
+    "score_label": "Score"
+  },
+  
+  "recommendations": {
+    "beginner_path": "Recommended Path: Beginner",
+    "intermediate_path": "Recommended Path: Intermediate",
+    "advanced_path": "Recommended Path: Advanced",
+    "start_with": "Start with:",
+    "once_comfortable": "Once comfortable, move to:",
+    "focus_on": "Focus on:",
+    "deepen_knowledge": "Deepen your knowledge:",
+    "next_steps": "Next steps:",
+    "additional_resources": "Additional Resources:",
+    "build_projects": "Build real-world projects",
+    "contribute_opensource": "Contribute to open source",
+    "learn_microservices": "Learn microservices architecture"
+  },
+  
+  "exercises": {
+    "simple_api": {
+      "title": "Create a Simple REST API",
+      "description": "Build a products API with CRUD operations",
+      "difficulty": "Beginner"
+    },
+    "repository_pattern": {
+      "title": "Implement Repository Pattern",
+      "description": "Create generic repository for data access",
+      "difficulty": "Intermediate"
+    },
+    "authentication": {
+      "title": "Build Authentication System",
+      "description": "Implement JWT authentication",
+      "difficulty": "Advanced"
+    }
+  },
+  
+  "language": {
+    "select": "Select Language / 언어 선택",
+    "current": "Current language",
+    "changed": "Language changed to {lang}"
+  }
+}
